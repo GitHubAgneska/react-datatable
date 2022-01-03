@@ -1,12 +1,10 @@
+import mockdata from './mockData.json'
 // ......................................................
 // INITIAL STATE
 // ......................................................
 export const initialState = {
-        status: 'void',
-        data: null,
-        error: null,
 
-        collection: null,
+        collection: mockdata.list,
         sorted: false,
         sortedBy: { sortParam: '', reverse: false },
         searchActive: false,
@@ -15,44 +13,41 @@ export const initialState = {
         collectionAsPages: null,
         entries: 15,
         currentPage: null,
-        currentPageIndex: null,
+        currentPageIndex: 0,
         totalPages: 1
 }
-
 // ......................................................
 // REDUCER
 // ......................................................
-export default function reducer(state, action) {
+export const reducer = (state, action) => {
     let newState;
     switch (action.type) {
-        
+
+        case 'init':
+            return reduceCollectionAsPages(15)(state)
+
         case 'setCollection':
-            if ( collection.length ) { collection = null }
+            if ( state.collection.length ) { state.collection = null }
             return { ...state, collection: action.value }
         
         case 'setCollectionAsPages':
-            if ( collectionAsPages.length ) { collectionAsPages = null }
+            if ( state.collectionAsPages.length ) { state.collectionAsPages = null }
             return  { ...state, collectionAsPages: action.value }
         
         case 'setEntriesPerPage':
-            newState = setUpPages(action.value)
+            newState = reduceCollectionAsPages(action.value)
             return {...state, ...newState }
 
-        case 'setCurrentActivePageIndex':
-            return { ...state, currentPageIndex: action.value }
-        
-        case 'setTotalPages':
-            return { ...state, totalPages: action.value }
-        
-        case 'setCurrentActivePage':
-            return { ...state, currentPage: action.value }
+        case 'setCurrentPage':
+            let requestedIndex = action.value
+            return { ...state, currentPageIndex: requestedIndex, currentPage: state.collection[requestedIndex] }        
         
         case 'sortList':
-            let { param, reverseOrder } = action.value; 
-            newState =  { ... state, sortedBy: { param, reverseOrder } }
+            let { sortParam, reverseOrder } = action.value; 
+            newState =  { ...state, sortedBy: { sortParam, reverseOrder } }
             return reduceSort(sortParam, reverseOrder)(newState)
 
-        case 'searchtermChanged':
+        case 'searchList':
             return { ...state, searchTerm: action.value, searchActive: true }
         
         default: throw new Error (`${action.type} is not a valid action`)
@@ -63,12 +58,7 @@ export default function reducer(state, action) {
 // ......................................................
 // REDUCERS FUNCTIONS
 // ......................................................
-const updatePage = (pageNumber) => {
-
-}
-
-
-const setUpPages = (entries) => (state) => {
+const reduceCollectionAsPages = (entries) => (state) => {
     
     const currentList = state.collection
     const currentActivePageIndex = state.currentPageIndex
@@ -84,7 +74,7 @@ const setUpPages = (entries) => (state) => {
         from += entries
     }
     if ( !currentActivePageIndex ) { currentIndex = 0 }
-    if ( collectionAsPages.length ) { collectionAsPages = [] }
+    if ( state.collectionAsPages.length ) { state.collectionAsPages = [] }
     return {
         ...state,
         entries: entries,
@@ -112,9 +102,9 @@ const reduceSort = (sortParam, reverseOrder) => (state) => {
     newState =  {
         ...state,
         sorted: true,
-        sortedBy: { param, reverseOrder },
+        sortedBy: { sortParam, reverseOrder },
         collection: [...sortedList]
     }
-    return setUpPages(currentEntries)(newState)
+    return reduceCollectionAsPages(currentEntries)(newState)
 }
 
