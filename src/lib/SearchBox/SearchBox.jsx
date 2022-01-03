@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
 import { SearchSectionWrapper, SearchBoxWrapper, SearchBoxInput, SearchSuggestionsWrapper } from './SearchBox_style'
@@ -11,11 +12,11 @@ const SearchBox = ({values, handleSearchChange, clearInput, handleSearchSubmit, 
             <SearchBoxWrapper suggestionsBoxIsActive={suggestionsBoxIsActive}>
                 
                 <SearchBoxInput 
-                    type="text"
-                    placeholder="search"
-                    values={values}
-                    onChange={e => handleSearchChange(e)}
-                    onKeyDown={e => handleKeyDown(e)}
+                type="text"
+                placeholder="search"
+                values={values}
+                onChange={e => handleSearchChange(e)}
+                onKeyDown={e => handleKeyDown(e)}
                 />
                 <FontAwesomeIcon icon={faTimes} onClick={() => clearInput()} />
                 <FontAwesomeIcon icon={faSearch} onClick={() => handleSearchSubmit()} />
@@ -34,3 +35,12 @@ const SearchBox = ({values, handleSearchChange, clearInput, handleSearchSubmit, 
     )
 }
 export default SearchBox
+SearchBox.propTypes = {
+    values: PropTypes.string,
+    handleSearchChange: PropTypes.func.isRequired,
+    clearInput: PropTypes.func.isRequired,
+    handleSearchSubmit: PropTypes.func.isRequired,
+    /* suggestions: PropTypes.object, */
+    selectSuggestion: PropTypes.func.isRequired,
+    handleKeyDown: PropTypes.func.isRequired
+}

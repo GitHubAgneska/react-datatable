@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import TableHeader from './Table-header'
 import { TableWrapper, StyledTableHeader, StyledTable, StyledTableRow } from '../DataTable_style'
 import moment from 'moment'
@@ -19,7 +20,7 @@ const Table = ({currentPage, sortListBy, searchTerm}) => {
             if ( prop === 'dob' || prop ==='startDate') { valueToDisplay = moment(key[prop]).format('MM/DD/YY') }
             else { valueToDisplay = key[prop] }
             let match = false;
-            if (currentQuery.length > 4 && valueToDisplay.toLowerCase().includes(currentQuery)  ) { match=true }
+            if (currentQuery.length > 2 && valueToDisplay.toLowerCase().includes(currentQuery)  ) { match=true }
 
             return (<td key={Math.random()} style={{backgroundColor:match?'yellow':'none'}} >{valueToDisplay}</td>) 
         })        
@@ -41,3 +42,7 @@ const Table = ({currentPage, sortListBy, searchTerm}) => {
 }
 
 export default Table
+Table.propTypes = {
+    currentPage: PropTypes.array.isRequired,
+    sortListBy: PropTypes.func.isRequired,
+} 
