@@ -17,12 +17,14 @@ const Datatable = () => {
 
     const entriesOptions = [ 15, 30, 50]
     const selectEntriesAmount = (n) => { dispatch({ type:'setEntriesPerPage', value: n })}
-    const currentlyShowing = state.currentPage.length
-    const listTotal = state.collection.length
+    const currentlyShowing = state.currentPage?.length
+    const listTotal = state.collection?.length
 
+    const changePage = (pageNumber) => { console.log('page requested:', pageNumber); dispatch({ type: 'setCurrentPage', value: pageNumber})}
+    const sortListBy = (filterParam, reverse ) => { dispatch({ type: 'sortList', value: {filterParam, reverse}}) }
+    
     return (
         <ComponentWrapper>
-
             <SelectEntriesBox 
                 options={entriesOptions}
                 selectEntriesAmount={selectEntriesAmount}
@@ -30,21 +32,20 @@ const Datatable = () => {
                 listTotal={listTotal}
                 entries={state.entries}
             />
-
             { state.collectionAsPages &&
+                
                 <Table
                 currentPage={state.currentPage}
                 sortListBy={state.sortListBy}
                 searchTerm={state.searchTerm}
-
                 />
             }
 
-           {/*  <Pagination 
+            <Pagination 
                 totalPages={state.totalPages}
-                currentPage={currentPage}
+                currentPage={state.currentPage}
                 changePage={changePage}
-            /> */}
+            />
 
         </ComponentWrapper>
     )
