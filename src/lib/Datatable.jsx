@@ -15,13 +15,17 @@ const Datatable = () => {
         dispatch({type:'init'})
     }, [])
 
+    useEffect(() => {
+        console.log('state changed:', state)
+    }, [state])
+
     const entriesOptions = [ 15, 30, 50]
     const selectEntriesAmount = (n) => { dispatch({ type:'setEntriesPerPage', value: n })}
     const currentlyShowing = state.currentPage?.length
     const listTotal = state.collection?.length
 
     const changePage = (pageNumber) => { console.log('page requested:', pageNumber); dispatch({ type: 'setCurrentPage', value: pageNumber})}
-    const sortListBy = (filterParam, reverse ) => { dispatch({ type: 'sortList', value: {filterParam, reverse}}) }
+    const sortListBy = (sortParam, reverse ) => { dispatch({ type: 'sortList', value: {sortParam, reverse}}) }
     
     return (
         <ComponentWrapper>
@@ -36,7 +40,7 @@ const Datatable = () => {
                 
                 <Table
                 currentPage={state.currentPage}
-                sortListBy={state.sortListBy}
+                sortListBy={sortListBy}
                 searchTerm={state.searchTerm}
                 />
             }

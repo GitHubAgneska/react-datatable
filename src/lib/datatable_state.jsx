@@ -46,9 +46,10 @@ export const reducer = (state, action) => {
             return { ...state, currentPageIndex: requestedIndex, currentPage: collectionPages[requestedIndex] }        
         
         case 'sortList':
-            let { sortParam, reverseOrder } = action.value; 
+            let sortParam = action.value.sortParam
+            let reverseOrder = action.value.reverseOrder
             newState =  { ...state, sortedBy: { sortParam, reverseOrder } }
-            return reduceSort(sortParam, reverseOrder)(newState)
+            return reduceSort(newState)
 
         case 'searchList':
             return { ...state, searchTerm: action.value, searchActive: true }
@@ -93,20 +94,21 @@ const setUpPages = (state) => {
     }
 }
 
-const reduceSort = (sortParam, reverseOrder) => (state) => {
+const reduceSort = (state) => {
     let newState
+    const { sortParam, reverseOrder} = state.sortedBy
     const currentList = state.collection
     let sortedList = [ ...currentList] // ---- for 'sort()' will try to mutate 'currentList' and fail ---- !
     
-    if ( sortParam === 'state') {
+    !reverseOrder ?
+        sortedList.sort( (a, b) => a[sortParam].localeCompare(b[sortParam])) // a, b = employee objects of employees array
+        : sortedList.sort( (a, b) => b[sortParam].localeCompare(a[sortParam])) 
+   /*  if ( sortParam === 'state') {
         !reverseOrder?
             sortedList.sort( (a, b) => a[sortParam].name.localeCompare(b[sortParam].name))
             : sortedList.sort( (a, b) => b[sortParam].name.localeCompare(a[sortParam].name))
-    } else { 
-        !reverseOrder ?
-            sortedList.sort( (a, b) => a[sortParam].localeCompare(b[sortParam])) // a, b = employee objects of employees array
-            : sortedList.sort( (a, b) => b[sortParam].localeCompare(a[sortParam])) 
-    }
+    } else {
+    } */
     newState =  {
         ...state,
         sorted: true,
