@@ -14,12 +14,16 @@ const Datatable = () => {
     useEffect(() => {
         dispatch({type:'init'})
     }, [])
-    
+
+    const entriesOptions = [ 15, 30, 50]
+    const selectEntriesAmount = (n) => { dispatch({ type:'setEntriesPerPage', value: n })}
+    const currentlyShowing = state.currentPage.length
+    const listTotal = state.collection.length
 
     return (
         <ComponentWrapper>
 
-           {/*  <SelectEntriesBox 
+            <SelectEntriesBox 
                 options={entriesOptions}
                 selectEntriesAmount={selectEntriesAmount}
                 currentlyshowing={currentlyShowing}
@@ -27,8 +31,6 @@ const Datatable = () => {
                 entries={state.entries}
             />
 
-            
- */}
             { state.collectionAsPages &&
                 <Table
                 currentPage={state.currentPage}

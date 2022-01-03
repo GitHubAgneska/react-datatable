@@ -89,7 +89,7 @@ const setUpPages = (state) => {
         totalPages: totalPages,
         collectionAsPages: [...outputPages],
         currentPageIndex: currentIndex,
-        currentPage: outputPages[0]
+        currentPage: outputPages[currentIndex]
     }
 }
 
