@@ -1,4 +1,5 @@
 import { SelectEntriesBoxWrapper } from './SelectEntriesBox_style'
+import PropTypes from "prop-types"
 
 const SelectEntriesBox = ({options, entries, selectEntriesAmount, currentlyshowing, listTotal}) => {
 
@@ -23,3 +24,9 @@ const SelectEntriesBox = ({options, entries, selectEntriesAmount, currentlyshowi
 }
 
 export default SelectEntriesBox
+SelectEntriesBox.propTypes = {
+    options: PropTypes.array.isRequired,
+    selectEntriesAmount: PropTypes.func.isRequired,
+    currentlyshowing: PropTypes.number.isRequired,
+    listTotal: PropTypes.number.isRequired
+}

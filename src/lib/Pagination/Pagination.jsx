@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import { PaginationWrapper, PageNumber } from './Pagination_style'
 
 const Pagination = ({totalPages, currentActivePage, changePage}) => {
@@ -18,3 +19,8 @@ const Pagination = ({totalPages, currentActivePage, changePage}) => {
     )
 }
 export default Pagination
+Pagination.propTypes = {
+    totalPages: PropTypes.number.isRequired,
+    currentActivePage: PropTypes.number.isRequired,
+    changePage: PropTypes.func.isRequired
+}

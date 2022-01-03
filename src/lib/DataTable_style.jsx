@@ -5,7 +5,6 @@ export const ComponentWrapper = styled.div`
     margin:auto; padding-top: 5%;
 `
 
-
 export const TableWrapper = styled.div`
     display: flex;
     max-height: 90%;
