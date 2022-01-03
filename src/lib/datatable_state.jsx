@@ -4,17 +4,17 @@ import mockdata from './mockData.json'
 // ......................................................
 export const initialState = {
 
-        collection: mockdata.list,
+        collection: null,
         sorted: false,
         sortedBy: { sortParam: '', reverse: false },
         searchActive: false,
         searchTerm: '',
 
         collectionAsPages: null,
-        entries: 15,
+        entries: null,
         currentPage: null,
-        currentPageIndex: 1,
-        totalPages: 1
+        currentPageIndex: null,
+        totalPages: null
 }
 // ......................................................
 // REDUCER
@@ -24,8 +24,8 @@ export const reducer = (state, action) => {
     switch (action.type) {
 
         case 'init':
-            newState = {...state, collection:  mockdata.list }
-            return reduceCollectionAsPages(15)(newState)
+            newState = { ...state, collection: mockdata.list, entries: 15, currentPageIndex: 0 }
+            return setUpPages(newState)
 
         case 'setCollection':
             if ( state.collection.length ) { state.collection = null }
@@ -37,11 +37,13 @@ export const reducer = (state, action) => {
         
         case 'setEntriesPerPage':
             let requestedEntries = action.value
-            return reduceCollectionAsPages(requestedEntries)
+            newState = { ...state, entries: requestedEntries}
+            return setUpPages(newState)
 
         case 'setCurrentPage':
             let requestedIndex = action.value
-            return { ...state, currentPageIndex: requestedIndex, currentPage: state.collection[requestedIndex] }        
+            let collectionPages = state.collectionAsPages
+            return { ...state, currentPageIndex: requestedIndex, currentPage: collectionPages[requestedIndex] }        
         
         case 'sortList':
             let { sortParam, reverseOrder } = action.value; 
@@ -59,12 +61,13 @@ export const reducer = (state, action) => {
 // ......................................................
 // REDUCERS FUNCTIONS
 // ......................................................
-const reduceCollectionAsPages = (entries)  => {
-    console.log('reduceCollectionAsPages called')
+const setUpPages = (state) => {
+    console.log('setUpPages called')
     
-    const currentList = initialState.collection
-    const currentActivePageIndex = initialState.currentPageIndex
-    let currentIndex
+    const currentList = state.collection
+    const currentIndex = state.currentPageIndex??0
+    const entries = state.entries
+
     let outputPages = []
     let from = 0
     let totalPages = Math.floor(currentList.length / entries)
@@ -75,23 +78,24 @@ const reduceCollectionAsPages = (entries)  => {
         outputPages.push(currentList.slice(from, to ))
         from += entries
     }
-    if ( !currentActivePageIndex ) { currentIndex = 1 }
-    if ( initialState.collectionAsPages && initialState.collectionAsPages.length ) { initialState.collectionAsPages = [] }
+
+    if ( state.collectionAsPages && state.collectionAsPages.length ) { state.collectionAsPages = [] }
     
     console.log('entries:', entries,'totalPages=', totalPages, 'outputPages=', outputPages )
+    
     return {
-        ...initialState,
+        ...state,
         entries: entries,
         totalPages: totalPages,
         collectionAsPages: [...outputPages],
-        currentPageIndex: currentIndex
+        currentPageIndex: currentIndex,
+        currentPage: outputPages[0]
     }
 }
 
 const reduceSort = (sortParam, reverseOrder) => (state) => {
     let newState
     const currentList = state.collection
-    const currentEntries = state.entries
     let sortedList = [ ...currentList] // ---- for 'sort()' will try to mutate 'currentList' and fail ---- !
     
     if ( sortParam === 'state') {
@@ -109,6 +113,6 @@ const reduceSort = (sortParam, reverseOrder) => (state) => {
         sortedBy: { sortParam, reverseOrder },
         collection: [...sortedList]
     }
-    return reduceCollectionAsPages(currentEntries)(newState)
+    return setUpPages(newState)
 }
 

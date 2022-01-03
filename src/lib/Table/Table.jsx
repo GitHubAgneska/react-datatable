@@ -2,8 +2,8 @@ import TableHeader from './Table-header'
 import { TableWrapper, StyledTableHeader, StyledTable, StyledTableRow } from '../DataTable_style'
 import moment from 'moment'
 
-const Table = ({currentPageToDisplay, sortListBy, searchTerm}) => {
-    console.log('TABLE => currentPageToDisplay', currentPageToDisplay)
+const Table = ({currentPage, sortListBy, searchTerm}) => {
+    console.log('TABLE => currentPage', currentPage)
 
     const currentQuery = searchTerm
 
@@ -16,8 +16,9 @@ const Table = ({currentPageToDisplay, sortListBy, searchTerm}) => {
         
         const columnData = tableCell.map( prop => {
             let valueToDisplay
-            if ( key[prop].hasOwnProperty('name') ) { valueToDisplay = key[prop]['name'] }
-            else if ( prop === 'dob' || prop ==='startDate') { valueToDisplay = moment(key[prop]).format('MM/DD/YY') }
+            // if prop is an object:
+            // if ( key[prop].hasOwnProperty('----') ) { valueToDisplay = key[prop]['----'] }
+            if ( prop === 'dob' || prop ==='startDate') { valueToDisplay = moment(key[prop]).format('MM/DD/YY') }
             else { valueToDisplay = key[prop] }
             let match = false;
             if (currentQuery.length > 4 && valueToDisplay.toLowerCase().includes(currentQuery)  ) { match=true }
@@ -27,7 +28,7 @@ const Table = ({currentPageToDisplay, sortListBy, searchTerm}) => {
         return (<StyledTableRow key={Math.random()}>{columnData}</StyledTableRow>)
     }
 
-    const tableData = () => { return currentPageToDisplay.map((key, index) => tableRow({key, index}))  }
+    const tableData = () => { return currentPage.map((key, index) => tableRow({key, index}))  }
 
     return (
         <TableWrapper>
