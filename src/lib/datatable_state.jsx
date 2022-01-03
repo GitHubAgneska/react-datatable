@@ -13,7 +13,7 @@ export const initialState = {
         collectionAsPages: null,
         entries: 15,
         currentPage: null,
-        currentPageIndex: 0,
+        currentPageIndex: 1,
         totalPages: 1
 }
 // ......................................................
@@ -24,7 +24,8 @@ export const reducer = (state, action) => {
     switch (action.type) {
 
         case 'init':
-            return reduceCollectionAsPages(15)(state)
+            newState = {...state, collection:  mockdata.list }
+            return reduceCollectionAsPages(15)(newState)
 
         case 'setCollection':
             if ( state.collection.length ) { state.collection = null }
@@ -35,8 +36,8 @@ export const reducer = (state, action) => {
             return  { ...state, collectionAsPages: action.value }
         
         case 'setEntriesPerPage':
-            newState = reduceCollectionAsPages(action.value)
-            return {...state, ...newState }
+            let requestedEntries = action.value
+            return reduceCollectionAsPages(requestedEntries)
 
         case 'setCurrentPage':
             let requestedIndex = action.value
@@ -58,10 +59,11 @@ export const reducer = (state, action) => {
 // ......................................................
 // REDUCERS FUNCTIONS
 // ......................................................
-const reduceCollectionAsPages = (entries) => (state) => {
+const reduceCollectionAsPages = (entries)  => {
+    console.log('reduceCollectionAsPages called')
     
-    const currentList = state.collection
-    const currentActivePageIndex = state.currentPageIndex
+    const currentList = initialState.collection
+    const currentActivePageIndex = initialState.currentPageIndex
     let currentIndex
     let outputPages = []
     let from = 0
@@ -73,14 +75,16 @@ const reduceCollectionAsPages = (entries) => (state) => {
         outputPages.push(currentList.slice(from, to ))
         from += entries
     }
-    if ( !currentActivePageIndex ) { currentIndex = 0 }
-    if ( state.collectionAsPages.length ) { state.collectionAsPages = [] }
+    if ( !currentActivePageIndex ) { currentIndex = 1 }
+    if ( initialState.collectionAsPages && initialState.collectionAsPages.length ) { initialState.collectionAsPages = [] }
+    
+    console.log('entries:', entries,'totalPages=', totalPages, 'outputPages=', outputPages )
     return {
-        ...state,
+        ...initialState,
         entries: entries,
         totalPages: totalPages,
         collectionAsPages: [...outputPages],
-        currentActivePageIndex: currentIndex
+        currentPageIndex: currentIndex
     }
 }
 

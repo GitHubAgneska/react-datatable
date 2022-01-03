@@ -3,9 +3,9 @@ import { TableWrapper, StyledTableHeader, StyledTable, StyledTableRow } from '..
 import moment from 'moment'
 
 const Table = ({currentPageToDisplay, sortListBy, searchTerm}) => {
+    console.log('TABLE => currentPageToDisplay', currentPageToDisplay)
 
     const currentQuery = searchTerm
-
 
     const tableHead = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department']
 
