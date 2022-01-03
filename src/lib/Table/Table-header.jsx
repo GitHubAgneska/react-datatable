@@ -4,7 +4,6 @@ import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TableHeaderIconWrapper } from  '../DataTable_style'
 
-
 let headers = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department']
 
 const TableHeader = ( { sortListBy } ) => { 

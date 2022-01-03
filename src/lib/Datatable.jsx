@@ -24,7 +24,7 @@ const Datatable = () => {
     const currentlyShowing = state.currentPage?.length
     const listTotal = state.collection?.length
 
-    const changePage = (pageNumber) => { console.log('page requested:', pageNumber); dispatch({ type: 'setCurrentPage', value: pageNumber})}
+    const changePage = (pageNumber) => { dispatch({ type: 'setCurrentPage', value: pageNumber})}
     const sortListBy = (sortParam, reverse ) => { dispatch({ type: 'sortList', value: {sortParam, reverse}}) }
     
     return (

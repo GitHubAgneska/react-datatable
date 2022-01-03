@@ -3,7 +3,6 @@ import { TableWrapper, StyledTableHeader, StyledTable, StyledTableRow } from '..
 import moment from 'moment'
 
 const Table = ({currentPage, sortListBy, searchTerm}) => {
-    console.log('TABLE => currentPage', currentPage)
 
     const currentQuery = searchTerm
 
@@ -16,8 +15,7 @@ const Table = ({currentPage, sortListBy, searchTerm}) => {
         
         const columnData = tableCell.map( prop => {
             let valueToDisplay
-            // if prop is an object:
-            // if ( key[prop].hasOwnProperty('----') ) { valueToDisplay = key[prop]['----'] }
+            // if prop is an object => if ( key[prop].hasOwnProperty('----') ) { valueToDisplay = key[prop]['----'] }
             if ( prop === 'dob' || prop ==='startDate') { valueToDisplay = moment(key[prop]).format('MM/DD/YY') }
             else { valueToDisplay = key[prop] }
             let match = false;

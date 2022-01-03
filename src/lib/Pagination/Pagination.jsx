@@ -1,6 +1,6 @@
-import { PaginationWrapper, PageNumber } from './Pagination_style'
+import { PaginationWrapper, PageNumber } from './Pagination_style'
 
-const Pagination = ({totalPages, currentActivePage, changePage}) => { 
+const Pagination = ({totalPages, currentActivePage, changePage}) => {
 
     return (
 

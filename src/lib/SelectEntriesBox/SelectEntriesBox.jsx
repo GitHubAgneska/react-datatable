@@ -2,7 +2,6 @@ import { SelectEntriesBoxWrapper } from './SelectEntriesBox_style'
 
 const SelectEntriesBox = ({options, entries, selectEntriesAmount, currentlyshowing, listTotal}) => {
 
-
     return (
         <SelectEntriesBoxWrapper>
 
