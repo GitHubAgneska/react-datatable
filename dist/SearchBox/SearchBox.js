@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _react = _interopRequireDefault(require("react"));
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _reactFontawesome = require("@fortawesome/react-fontawesome");
@@ -36,9 +38,9 @@ var SearchBox = function SearchBox(_ref) {
       selectSuggestion = _ref.selectSuggestion,
       handleKeyDown = _ref.handleKeyDown;
   var suggestionsBoxIsActive = suggestions && suggestions.size > 0;
-  return /*#__PURE__*/React.createElement(_SearchBox_style.SearchSectionWrapper, null, /*#__PURE__*/React.createElement(_SearchBox_style.SearchBoxWrapper, {
+  return /*#__PURE__*/_react.default.createElement(_SearchBox_style.SearchSectionWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBox_style.SearchBoxWrapper, {
     suggestionsBoxIsActive: suggestionsBoxIsActive
-  }, /*#__PURE__*/React.createElement(_SearchBox_style.SearchBoxInput, {
+  }, /*#__PURE__*/_react.default.createElement(_SearchBox_style.SearchBoxInput, {
     type: "text",
     placeholder: "search",
     values: values,
@@ -48,18 +50,18 @@ var SearchBox = function SearchBox(_ref) {
     onKeyDown: function onKeyDown(e) {
       return handleKeyDown(e);
     }
-  }), /*#__PURE__*/React.createElement(_reactFontawesome.FontAwesomeIcon, {
+  }), /*#__PURE__*/_react.default.createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: _freeSolidSvgIcons.faTimes,
     onClick: function onClick() {
       return clearInput();
     }
-  }), /*#__PURE__*/React.createElement(_reactFontawesome.FontAwesomeIcon, {
+  }), /*#__PURE__*/_react.default.createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: _freeSolidSvgIcons.faSearch,
     onClick: function onClick() {
       return handleSearchSubmit();
     }
-  })), suggestions && suggestions.size > 0 && /*#__PURE__*/React.createElement(_SearchBox_style.SearchSuggestionsWrapper, null, /*#__PURE__*/React.createElement("ul", null, _toConsumableArray(suggestions.keys()).map(function (s) {
-    return /*#__PURE__*/React.createElement("li", {
+  })), suggestions && suggestions.size > 0 && /*#__PURE__*/_react.default.createElement(_SearchBox_style.SearchSuggestionsWrapper, null, /*#__PURE__*/_react.default.createElement("ul", null, _toConsumableArray(suggestions.keys()).map(function (s) {
+    return /*#__PURE__*/_react.default.createElement("li", {
       key: Math.random(),
       onClick: function onClick() {
         return selectSuggestion(s);

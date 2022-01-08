@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _react = _interopRequireDefault(require("react"));
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _Pagination_style = require("./Pagination_style");
@@ -27,8 +29,8 @@ var Pagination = function Pagination(_ref) {
   var totalPages = _ref.totalPages,
       currentActivePage = _ref.currentActivePage,
       changePage = _ref.changePage;
-  return /*#__PURE__*/React.createElement(_Pagination_style.PaginationWrapper, null, _toConsumableArray(Array(totalPages)).map(function (x, i) {
-    return /*#__PURE__*/React.createElement(_Pagination_style.PageNumber, {
+  return /*#__PURE__*/_react.default.createElement(_Pagination_style.PaginationWrapper, null, _toConsumableArray(Array(totalPages)).map(function (x, i) {
+    return /*#__PURE__*/_react.default.createElement(_Pagination_style.PageNumber, {
       key: Math.random(),
       currentActivePage: i === currentActivePage,
       onClick: function onClick() {

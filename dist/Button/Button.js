@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _react = _interopRequireDefault(require("react"));
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _ButtonStyle = require("./Button-style");
@@ -16,7 +18,7 @@ var Button = function Button(_ref) {
       handleClick = _ref.handleClick,
       disabled = _ref.disabled,
       width = _ref.width;
-  return /*#__PURE__*/React.createElement(_ButtonStyle.StyledBtn, {
+  return /*#__PURE__*/_react.default.createElement(_ButtonStyle.StyledBtn, {
     onClick: function onClick(e) {
       return handleClick(e);
     },
