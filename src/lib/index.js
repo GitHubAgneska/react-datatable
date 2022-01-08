@@ -3,6 +3,7 @@ import Pagination from './Pagination/Pagination'
 import SearchBox from './SearchBox/SearchBox'
 import SelectEntriesBox from './SelectEntriesBox/SelectEntriesBox'
 import Table from './Table/Table'
+import TableHeader from './Table/Table-header'
 import Datatable from './Datatable'
 import { 
     ComponentWrapper,
@@ -20,6 +21,7 @@ export { 
     SearchBox,
     SelectEntriesBox,
     Table,
+    TableHeader,
     Datatable,
     ComponentWrapper,
     TableWrapper,

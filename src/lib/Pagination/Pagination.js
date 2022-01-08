@@ -21,7 +21,7 @@ const Pagination = ({totalPages, currentActivePage, changePage}) => {
 }
 export default Pagination
 Pagination.propTypes = {
-    totalPages: PropTypes.number.isRequired,
-    currentActivePage: PropTypes.number.isRequired,
+    totalPages: PropTypes.number,
+    currentActivePage: PropTypes.number,
     changePage: PropTypes.func.isRequired
 }

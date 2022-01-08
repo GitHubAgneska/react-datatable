@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from "prop-types"
 import TableHeader from './Table-header'
 import { TableWrapper, StyledTableHeader, StyledTable, StyledTableRow } from '../DataTable_style'
@@ -43,6 +44,6 @@ const Table = ({currentPage, sortListBy, searchTerm}) => {
 
 export default Table
 Table.propTypes = {
-    currentPage: PropTypes.array.isRequired,
-    sortListBy: PropTypes.func.isRequired,
+    currentPage: PropTypes.array,
+    sortListBy: PropTypes.func,
 } 

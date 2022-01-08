@@ -28,6 +28,6 @@ export default SelectEntriesBox
 SelectEntriesBox.propTypes = {
     options: PropTypes.array.isRequired,
     selectEntriesAmount: PropTypes.func.isRequired,
-    currentlyshowing: PropTypes.number.isRequired,
-    listTotal: PropTypes.number.isRequired
+    currentlyshowing: PropTypes.number,
+    listTotal: PropTypes.number
 }
