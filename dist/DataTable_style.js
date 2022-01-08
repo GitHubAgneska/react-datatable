@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ComponentWrapper = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height:100vh; width: 90%;\n    margin:auto; padding-top: 5%;\n"])));
+var ComponentWrapper = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height:100vh; width: 90%;\n    margin:auto; padding-top: 5%;\n    position: relative;\n"])));
 
 exports.ComponentWrapper = ComponentWrapper;
 
@@ -33,6 +33,6 @@ var TableHeaderIconWrapper = _styledComponents.default.div(_templateObject5 || (
 
 exports.TableHeaderIconWrapper = TableHeaderIconWrapper;
 
-var StyledTableRow = _styledComponents.default.tr(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    height: 2rem;\n    \n    :nth-child(even) {background-color: #ccc }\n    &:hover { background-color: lightblue; color: white;  }\n    \n    td { \n        width: 10%;\n        overflow: hidden;\n    }\n"])));
+var StyledTableRow = _styledComponents.default.tr(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    height: 2rem;\n    \n    :nth-child(even) {background-color: #ccc }\n    &:hover { background-color: lightblue;  }\n    \n    td { \n        width: 10%;\n        overflow: hidden;\n        text-align: center;\n    }\n"])));
 
 exports.StyledTableRow = StyledTableRow;

@@ -3,6 +3,7 @@ import styled from "styled-components"
 export const ComponentWrapper = styled.div`
     height:100vh; width: 90%;
     margin:auto; padding-top: 5%;
+    position: relative;
 `
 
 export const TableWrapper = styled.div`
@@ -38,11 +39,12 @@ export const StyledTableRow = styled.tr`
     height: 2rem;
     
     :nth-child(even) {background-color: #ccc }
-    &:hover { background-color: lightblue; color: white;  }
+    &:hover { background-color: lightblue;  }
     
     td { 
         width: 10%;
         overflow: hidden;
+        text-align: center;
     }
 `
 
