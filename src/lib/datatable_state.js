@@ -28,11 +28,11 @@ export const reducer = (state, action) => {
             return setUpPages(newState)
 
         case 'setCollection':
-            if ( state.collection.length ) { state.collection = null }
+            if ( state.collection && state.collection.length > 0 ) { state.collection = null }
             return { ...state, collection: action.value }
         
         case 'setCollectionAsPages':
-            if ( state.collectionAsPages.length ) { state.collectionAsPages = null }
+            if ( state.collectionAsPages && state.collectionAsPages.length > 0 ) { state.collectionAsPages = null }
             return  { ...state, collectionAsPages: action.value }
         
         case 'setEntriesPerPage':

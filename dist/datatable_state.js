@@ -63,7 +63,7 @@ var reducer = function reducer(state, action) {
       return setUpPages(newState);
 
     case 'setCollection':
-      if (state.collection.length) {
+      if (state.collection && state.collection.length > 0) {
         state.collection = null;
       }
 
@@ -72,7 +72,7 @@ var reducer = function reducer(state, action) {
       });
 
     case 'setCollectionAsPages':
-      if (state.collectionAsPages.length) {
+      if (state.collectionAsPages && state.collectionAsPages.length > 0) {
         state.collectionAsPages = null;
       }
 
