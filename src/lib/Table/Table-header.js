@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fragment } from "react"
+
 import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ let headers = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', '
 const TableHeader = ( { sortListBy } ) => { 
 
     return (
-        <Fragment>
+        <div>
             <tr>
                 { headers.map(h => (
                     <th key={Math.random()}>
@@ -22,7 +22,7 @@ const TableHeader = ( { sortListBy } ) => {
                     </th>
                 ))}
             </tr>
-        </Fragment>
+        </div>
     )
 }
 export default TableHeader
