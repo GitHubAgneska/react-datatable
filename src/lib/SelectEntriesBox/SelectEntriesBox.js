@@ -1,3 +1,4 @@
+import React from 'react';
 import { SelectEntriesBoxWrapper } from './SelectEntriesBox_style'
 import PropTypes from "prop-types"
 

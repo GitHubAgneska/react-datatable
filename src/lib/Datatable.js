@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useReducer, useState } from "react"
 import { reducer, initialState } from './datatable_state'
 import { searchSuggestions } from './searchText'
