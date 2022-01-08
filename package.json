@@ -9,7 +9,7 @@
     "pagination",
     "search"
   ],
-  "version": "0.1.3",
+  "version": "1.0.0",
   "private": false,
   "engines": {
     "node": "16.x"
