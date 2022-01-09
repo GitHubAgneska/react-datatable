@@ -5,7 +5,7 @@
     - Sort table by original model property, with optional reverse order
 
 <p align="center">
-    <img src="./public/img/Screenshot 2022-01-08 at 18.35.22.png" >
+    <img src="./public/img/Screenshot 2022-01-08 at 18.35.22.png">
 </p>
 
 ### Stack

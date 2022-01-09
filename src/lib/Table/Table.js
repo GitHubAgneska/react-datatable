@@ -9,7 +9,15 @@ const Table = ({currentPage, sortListBy, searchTerm}) => {
     const currentQuery = searchTerm
 
     const tableHead = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department']
-
+    
+    /** @function tableRow 
+     *  uses @type {Object} employee passed by @function tableData
+     *  and  @type {Array} tableHead
+     *  to generate @function columnData
+     *  @function columnData maps these together to produce @type{Markup} for each table data cell <td>
+     *  if needed, it processes data from employee object to prepare for render (@example using momentjs to format dates)
+     *  @returns @type{Markup} StyledTableRow : each table row corresponding to an employee object, mapped as table data cells
+    */
     const tableRow = employee => {
         // eslint-disable-next-line no-unused-vars
         const { key, value } = employee
@@ -28,6 +36,11 @@ const Table = ({currentPage, sortListBy, searchTerm}) => {
         return (<StyledTableRow key={Math.random()}>{columnData}</StyledTableRow>)
     }
 
+    /** @function tableData 
+     *  maps currentPage @type{employees[]} to key:index pairs
+     *  for @function tableRow to use
+     *  @returns {@function tableRow}
+    */
     const tableData = () => { return currentPage.map((key, index) => tableRow({key, index}))  }
 
     return (
