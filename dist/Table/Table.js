@@ -23,6 +23,14 @@ var Table = function Table(_ref) {
       searchTerm = _ref.searchTerm;
   var currentQuery = searchTerm;
   var tableHead = ['firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department'];
+  /** @function tableRow 
+   *  uses @type {Object} employee passed by @function tableData
+   *  and  @type {Array} tableHead
+   *  to generate @function columnData
+   *  @function columnData maps these together to produce @type{Markup} for each table data cell <td>
+   *  if needed, it processes data from employee object to prepare for render (@example using momentjs to format dates)
+   *  @returns @type{Markup} StyledTableRow : each table row corresponding to an employee object, mapped as table data cells
+  */
 
   var tableRow = function tableRow(employee) {
     // eslint-disable-next-line no-unused-vars
@@ -55,6 +63,12 @@ var Table = function Table(_ref) {
       key: Math.random()
     }, columnData);
   };
+  /** @function tableData 
+   *  maps currentPage @type{employees[]} to key:index pairs
+   *  for @function tableRow to use
+   *  @returns {@function tableRow}
+  */
+
 
   var tableData = function tableData() {
     return currentPage.map(function (key, index) {
