@@ -23,6 +23,11 @@ export const reducer = (state, action) => {
     let newState;
     switch (action.type) {
 
+        case 'init':
+            let datasource = action.payload
+            newState = { ...state, collection: datasource, entries: 15, currentPageIndex: 0 }
+            return setUpPages(newState)
+
         case 'initWithMock':
             newState = { ...state, collection: mockdata.list, entries: 15, currentPageIndex: 0 }
             return setUpPages(newState)
@@ -60,17 +65,22 @@ export const reducer = (state, action) => {
 }
 
 // ......................................................
-// REDUCERS FUNCTIONS
+// REDUCER FUNCTIONS
 // ......................................................
 const setUpPages = (state) => {
     
     const currentList = state.collection
+    console.log('currentList=', currentList)
     const currentIndex = state.currentPageIndex??0
     const entries = state.entries
 
     let outputPages = []
     let from = 0
-    let totalPages = Math.floor(currentList.length / entries)
+
+    let totalPages
+    if (currentList.length > entries) {
+        totalPages = Math.floor(currentList.length / entries)
+    } else { totalPages = 1}
 
     // setup pages arrays
     for (let i = from; i <= totalPages; i++ ) {

@@ -1,17 +1,16 @@
-import React, { Fragment } from "react"
+import React from "react"
 import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TableHeaderIconWrapper } from  '../DataTable_style'
 
-let headers = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department']
 
-const TableHeader = ( { sortListBy } ) => { 
+const TableHeader = ( { sortListBy, tableHead } ) => { 
 
     return (
         <React.Fragment>
             <tr>
-                { headers.map(h => (
+                { tableHead.map(h => (
                     <th key={Math.random()}>
                         {h}
                         <TableHeaderIconWrapper>

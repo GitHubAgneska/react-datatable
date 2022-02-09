@@ -45,7 +45,7 @@ const Table = ({currentPage, sortListBy, searchTerm, tableHead}) => {
         <TableWrapper>
             <StyledTable>
                 <StyledTableHeader>
-                    <TableHeader sortListBy={sortListBy}/>
+                    <TableHeader sortListBy={sortListBy} tableHead={tableHead}/>
                 </StyledTableHeader>
                 <tbody>{tableData()}</tbody>    
             </StyledTable>
@@ -57,4 +57,5 @@ export default Table
 Table.propTypes = {
     currentPage: PropTypes.array,
     sortListBy: PropTypes.func,
+    tableHead: PropTypes.arrayOf(PropTypes.string),
 }

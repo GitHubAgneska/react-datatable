@@ -15,18 +15,24 @@ import SearchBox from './SearchBox/SearchBox'
 const Datatable = ({entriesOptions, tableHead, dataSrc }) => {
     
     const [ state, dispatch ] = useReducer(reducer, initialState)
-
+    
+    // reinit page action depends on datasource nature
+    const resetPage = (mockDataSrc) => {
+        return mockDataSrc? dispatch({type:'initWithMock'}): dispatch({type:'init', payload: dataSrc })
+    }
+    
     useEffect(() => {
         // use mockdata as data source
-        if (!dataSrc) dispatch({type:'initWithMock'})
-        else { }
-    }, [])
+        if (!dataSrc) { dispatch({type:'initWithMock'}) }
+        else { dispatch({type:'init', payload: dataSrc }) }
+
+    }, [dataSrc])
 
     useEffect(() => {
         console.log('state changed:', state)
     }, [state])
 
-    // const entriesOptions = [ 15, 30, 50 ]
+
     const selectEntriesAmount = (n) => { dispatch({ type:'setEntriesPerPage', value: n })}
     const currentlyShowing = state.currentPage?.length
     const listTotal = state.collection?.length
@@ -46,7 +52,7 @@ const Datatable = ({entriesOptions, tableHead, dataSrc }) => {
             setSuggestions(sugg)
         } else { 
             setSuggestions([])
-            dispatch({type:'init'})
+            resetPage()
         }
     }
     const handleKeyDown = e => {
@@ -64,7 +70,7 @@ const Datatable = ({entriesOptions, tableHead, dataSrc }) => {
             setSearchInputValues("")
             input.value = ""
             setSuggestions([])
-            dispatch({type:'init'})
+            resetPage()
         } else { return }
     }
     const selectSuggestion = (suggestion) => {
@@ -114,9 +120,8 @@ const Datatable = ({entriesOptions, tableHead, dataSrc }) => {
 export default Datatable
 
 Datatable.propTypes = {
-    mockDataSrc: PropTypes.bool,
     entriesOptions: PropTypes.array,
-    tableHead: PropTypes.array,
+    tableHead: PropTypes.arrayOf(PropTypes.string),
     dataSrc: PropTypes.arrayOf(PropTypes.object)
 }
 
