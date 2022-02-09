@@ -23,10 +23,16 @@ const Table = ({currentPage, sortListBy, searchTerm, tableHead}) => {
         
         const columnData = tableCell.map( prop => {
             let valueToDisplay
-            // if prop is an object => if ( key[prop].hasOwnProperty('----') ) { valueToDisplay = key[prop]['----'] }
-            if ( prop === 'dob' || prop ==='startDate') { valueToDisplay = moment(key[prop]).format('MM/DD/YY') }
+            // Process incoming object values to send/display into table row
+            // if prop is an object => ex: prop 'state': { name: 'xy', abbreviation: 'z' }
+            if ( key[prop] instanceof Object && key[prop].constructor === Object ) { valueToDisplay = key[prop][0] }
+            //  if prop is a DATE => format with MomentJS
+            if ( !isNaN(new Date(key[prop]).getDate()) ) { valueToDisplay = moment(key[prop]).format('MM/DD/YY') }
+            // if ( prop === 'dob' || prop ==='startDate') { valueToDisplay = moment(key[prop]).format('MM/DD/YY') }
             else { valueToDisplay = key[prop] }
+            
             let match = false;
+            
             if (currentQuery.length > 2 && valueToDisplay.toLowerCase().includes(currentQuery)  ) { match=true }
 
             return (<td key={Math.random()} style={{backgroundColor:match?'yellow':'none'}} >{valueToDisplay}</td>) 
