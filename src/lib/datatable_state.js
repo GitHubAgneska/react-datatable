@@ -23,7 +23,7 @@ export const reducer = (state, action) => {
     let newState;
     switch (action.type) {
 
-        case 'init':
+        case 'initWithMock':
             newState = { ...state, collection: mockdata.list, entries: 15, currentPageIndex: 0 }
             return setUpPages(newState)
 

@@ -1,27 +1,32 @@
-import React from 'react';
-import { useEffect, useReducer, useState } from "react"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { useEffect, useReducer, useState } from 'react'
 import { reducer, initialState } from './datatable_state'
 import { searchSuggestions } from './searchText'
+
 import { ComponentWrapper } from './DataTable_style'
 
 import Table from  './Table/Table'
 import Pagination from "./Pagination/Pagination"
 import SelectEntriesBox from './SelectEntriesBox/SelectEntriesBox'
-import SearchBox from "./SearchBox/SearchBox"
+import SearchBox from './SearchBox/SearchBox'
 
-const Datatable = () => {
+
+const Datatable = ({entriesOptions, tableHead, dataSrc }) => {
     
     const [ state, dispatch ] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        dispatch({type:'init'})
+        // use mockdata as data source
+        if (!dataSrc) dispatch({type:'initWithMock'})
+        else { }
     }, [])
 
     useEffect(() => {
         console.log('state changed:', state)
     }, [state])
 
-    const entriesOptions = [ 15, 30, 50]
+    // const entriesOptions = [ 15, 30, 50 ]
     const selectEntriesAmount = (n) => { dispatch({ type:'setEntriesPerPage', value: n })}
     const currentlyShowing = state.currentPage?.length
     const listTotal = state.collection?.length
@@ -92,6 +97,7 @@ const Datatable = () => {
             />
             { state.collectionAsPages &&
             <Table
+            tableHead={tableHead}
             currentPage={state.currentPage}
             sortListBy={sortListBy}
             searchTerm={state.searchTerm}
@@ -106,3 +112,17 @@ const Datatable = () => {
     )
 }
 export default Datatable
+
+Datatable.propTypes = {
+    mockDataSrc: PropTypes.bool,
+    entriesOptions: PropTypes.array,
+    tableHead: PropTypes.array,
+    dataSrc: PropTypes.arrayOf(PropTypes.object)
+}
+
+Datatable.defaultProps = {
+    mockDataSrc: true,
+    entriesOptions: [ 15, 30, 50 ],
+    tableHead: [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department'],
+    dataSrc: null
+}

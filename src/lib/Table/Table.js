@@ -4,11 +4,9 @@ import TableHeader from './Table-header'
 import { TableWrapper, StyledTableHeader, StyledTable, StyledTableRow } from '../DataTable_style'
 import moment from 'moment'
 
-const Table = ({currentPage, sortListBy, searchTerm}) => {
+const Table = ({currentPage, sortListBy, searchTerm, tableHead}) => {
 
     const currentQuery = searchTerm
-
-    const tableHead = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department']
     
     /** @function tableRow 
      *  uses @type {Object} employee passed by @function tableData
@@ -59,4 +57,4 @@ export default Table
 Table.propTypes = {
     currentPage: PropTypes.array,
     sortListBy: PropTypes.func,
-} 
+}
