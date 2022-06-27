@@ -47,6 +47,7 @@
     
 - More customization to come
     - Date formatting: currently defaults to 'MM/DD/YY'
+    - Tests
     - Styling
 
 ---
